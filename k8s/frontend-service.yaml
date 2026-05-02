@@ -1,0 +1,53 @@
+# Frontend Service for DevOps Tracker
+# LoadBalancer service for external access (use NodePort for Minikube/Kind)
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  namespace: devops-tracker
+  labels:
+    app: frontend
+    component: web
+spec:
+  type: LoadBalancer  # Change to NodePort for Minikube/Kind if LoadBalancer is not available
+  ports:
+  - port: 3000
+    targetPort: 80
+    protocol: TCP
+    name: http
+    # nodePort: 30000  # Uncomment for NodePort type (range: 30000-32767)
+  selector:
+    app: frontend
+  # Session affinity for consistent user sessions
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 3600  # 1 hour
+
+---
+# Alternative: NodePort Service for Minikube/Kind
+# Uncomment this section and comment out the LoadBalancer service above if needed
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: frontend-service
+#   namespace: devops-tracker
+#   labels:
+#     app: frontend
+#     component: web
+# spec:
+#   type: NodePort
+#   ports:
+#   - port: 3000
+#     targetPort: 80
+#     protocol: TCP
+#     name: http
+#     nodePort: 30000  # Access via http://<node-ip>:30000
+#   selector:
+#     app: frontend
+#   sessionAffinity: ClientIP
+#   sessionAffinityConfig:
+#     clientIP:
+#       timeoutSeconds: 3600

@@ -1,0 +1,22 @@
+# PersistentVolumeClaims for DevOps Tracker
+# These PVCs will be dynamically provisioned by the default StorageClass
+
+# NOTE: PostgreSQL PVC is managed by StatefulSet volumeClaimTemplates
+# See postgres-statefulset.yaml for PostgreSQL storage configuration
+
+---
+# Backend Exports PersistentVolumeClaim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: backend-exports-pvc
+  namespace: devops-tracker
+  labels:
+    app: backend
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  # storageClassName: standard  # Uncomment and modify for specific storage class

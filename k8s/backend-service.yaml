@@ -1,0 +1,25 @@
+# Backend Service for DevOps Tracker
+# ClusterIP service for internal API access
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: devops-tracker
+  labels:
+    app: backend
+    component: api
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5000
+    targetPort: 5000
+    protocol: TCP
+    name: http
+  selector:
+    app: backend
+  # Session affinity for consistent API connections
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 3600  # 1 hour
