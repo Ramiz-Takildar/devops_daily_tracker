@@ -1,54 +1,90 @@
 # 🚀 DevOps Daily Tracker
 
-A comprehensive, production-ready web application for tracking your DevOps learning journey with real-time analytics, progress visualization, and achievement tracking.
+<div align="center">
 
 ![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Kubernetes](https://img.shields.io/badge/kubernetes-ready-brightgreen.svg)
+![Docker](https://img.shields.io/badge/docker-ready-blue.svg)
+
+**A comprehensive, production-ready web application for tracking your DevOps learning journey**
+
+*Real-time analytics • Progress visualization • Achievement tracking • Kubernetes native*
+
+[Quick Start](#-quick-start) • [Features](#-features) • [Screenshots](#-screenshots) • [Documentation](#-documentation)
+
+</div>
 
 ---
 
-## 📋 Table of Contents
+## 📸 Screenshots
 
-- [Overview](#-overview)
-- [Features](#-features)
-- [Quick Start](#-quick-start)
-- [Commands](#-commands)
-- [Tech Stack](#-tech-stack)
-- [Architecture](#-architecture)
-- [API Documentation](#-api-documentation)
-- [Development](#-development)
+<div align="center">
+
+### 🎯 Dashboard - Your Learning Hub
+![Dashboard](screenshots/dashboard.png)
+*Real-time statistics, weekly heatmap, and smart insights at a glance*
+
+### 📊 Tool Tracker - Log Your Progress
+![Tool Tracker](screenshots/tool-tracker.png)
+*Track hours spent on Docker, Kubernetes, AWS, and more*
+
+### 📈 Analytics - Visualize Your Growth
+![Analytics](screenshots/analytics.png)
+*Interactive charts showing your learning patterns and trends*
+
+### 🏆 Achievements - Celebrate Milestones
+![Achievements](screenshots/achievement.png)
+*Unlock badges and track your accomplishments*
+
+### 🔐 Secure Authentication
+![Login](screenshots/login.png)
+*JWT-based secure login with modern UI*
+
+</div>
 
 ---
 
 ## 🎯 Overview
 
-**DevOps Daily Tracker** is a modern, full-stack web application designed to help DevOps engineers, students, and professionals track their learning progress across various tools and technologies. Deployed on **Kubernetes** for production-grade reliability.
+**DevOps Daily Tracker** is a modern, full-stack web application designed to help DevOps engineers, students, and professionals track their learning progress across various tools and technologies. Built with React, Node.js, and PostgreSQL, deployed on **Kubernetes** for production-grade reliability.
 
-### Why DevOps Daily Tracker?
+### ✨ Why Choose DevOps Daily Tracker?
 
-- **📊 Comprehensive Tracking**: Log daily hours spent on different DevOps tools
-- **🎯 Goal Management**: Set and track learning goals with progress visualization
-- **📈 Smart Analytics**: Get insights into your learning patterns and productivity
-- **🏆 Achievements**: Unlock badges and milestones as you progress
-- **📱 Modern UI**: Premium glassmorphism design with smooth animations
-- **🔒 Secure**: JWT-based authentication with password encryption
-- **☸️ Kubernetes Native**: Runs on any Kubernetes cluster
-- **💾 Persistent**: All data survives pod restarts
+<table>
+<tr>
+<td width="50%">
 
----
+**📊 Comprehensive Tracking**
+- Log daily hours for 8+ DevOps tools
+- Multiple entries per day
+- Add notes and context
+- Real-time proficiency calculation
 
-## ✨ Features
+**🎯 Goal Management**
+- Set learning goals with deadlines
+- Track progress visually
+- Get milestone notifications
+- Celebrate achievements
 
-### Core Features
+</td>
+<td width="50%">
 
-- **Tool Tracking**: Log hours for 8+ DevOps tools (Linux, Git, Docker, Kubernetes, Jenkins, Terraform, AWS, Azure)
-- **Dashboard**: Real-time statistics, weekly heatmap, proficiency overview
-- **Analytics**: Interactive charts, time distribution, export as CSV/PDF
-- **Project Tracking**: Manage DevOps projects with progress tracking
-- **Goals & Achievements**: Set goals, unlock badges, track milestones
-- **Profile Management**: Upload avatar, edit info, change password
-- **Notifications**: Real-time alerts for goals and achievements
+**📈 Smart Analytics**
+- Interactive charts and graphs
+- Time distribution analysis
+- Weekly/monthly comparisons
+- Export as CSV/PDF
+
+**☸️ Kubernetes Native**
+- Production-ready deployment
+- Auto-scaling capabilities
+- Persistent data storage
+- High availability
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -71,77 +107,147 @@ cd devops_daily_tracker
 ./start.sh
 ```
 
+**🎉 That's it!** Your application is now running.
+
 **Access:** http://localhost:3000
 
 **Demo Account:**
-- Email: `demo@devopstracker.com`
-- Password: `Demo123!`
+```
+Email:    demo@devopstracker.com
+Password: Demo123!
+```
 
 ---
 
 ## 📝 Commands
 
-### Start Application
+<table>
+<tr>
+<td width="33%">
+
+### 🚀 Start
 ```bash
 ./start.sh
 ```
-Builds images, deploys to Kubernetes, creates demo user, and starts port-forwarding.
+Builds images, deploys to Kubernetes, creates demo user
 
-### Stop Application
+</td>
+<td width="33%">
+
+### 🛑 Stop
 ```bash
 ./stop.sh
 ```
-Stops all pods but **preserves data** in persistent volumes.
+Stops all pods, **preserves data**
 
-### Complete Cleanup
+</td>
+<td width="33%">
+
+### 🧹 Cleanup
 ```bash
 ./cleanup.sh
 ```
-**WARNING:** Removes everything including database. All data will be lost.
+**Removes everything** including database
 
-### View Logs
+</td>
+</tr>
+</table>
+
+### Additional Commands
+
 ```bash
-# Frontend logs
-kubectl logs -n devops-tracker -l app=frontend -f
-
-# Backend logs
-kubectl logs -n devops-tracker -l app=backend -f
-
-# Database logs
-kubectl logs -n devops-tracker postgres-0 -f
-```
-
-### View Resources
-```bash
+# View all resources
 kubectl get all -n devops-tracker
-```
 
-### Restart Port-Forward
-```bash
+# View logs
+kubectl logs -n devops-tracker -l app=frontend -f
+kubectl logs -n devops-tracker -l app=backend -f
+kubectl logs -n devops-tracker postgres-0 -f
+
+# Restart port-forward
 kubectl port-forward -n devops-tracker svc/frontend-service 3000:3000
 ```
 
 ---
 
+## ✨ Features
+
+<table>
+<tr>
+<td width="50%">
+
+### 🎯 Core Features
+
+**Tool Tracking**
+- 8+ predefined DevOps tools
+- Custom time logging
+- Notes and context
+- Proficiency levels
+
+**Dashboard**
+- Real-time statistics
+- Weekly activity heatmap
+- Tool proficiency overview
+- Recent activity feed
+- Smart insights
+
+**Analytics**
+- Interactive charts
+- Time distribution
+- Tool usage trends
+- Export capabilities
+
+</td>
+<td width="50%">
+
+### 🏆 Advanced Features
+
+**Project Management**
+- Create DevOps projects
+- Track progress
+- Link tools to projects
+- Status management
+
+**Goals & Achievements**
+- Set learning goals
+- Track milestones
+- Unlock badges
+- Gamification
+
+**Profile Management**
+- Upload avatar
+- Edit information
+- Change password
+- View statistics
+
+</td>
+</tr>
+</table>
+
+---
+
 ## 🛠 Tech Stack
 
+<div align="center">
+
 ### Frontend
-- **React 18** - UI library
-- **Vite** - Build tool
-- **Tailwind CSS** - Styling
-- **Framer Motion** - Animations
-- **Recharts** - Data visualization
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind-3-38B2AC?logo=tailwind-css&logoColor=white)
+![Framer](https://img.shields.io/badge/Framer_Motion-10-0055FF?logo=framer&logoColor=white)
 
 ### Backend
-- **Node.js** - Runtime
-- **Express.js** - Web framework
-- **PostgreSQL** - Database
-- **JWT** - Authentication
+![Node.js](https://img.shields.io/badge/Node.js-20-339933?logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express-4-000000?logo=express&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?logo=postgresql&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-Auth-000000?logo=json-web-tokens&logoColor=white)
 
 ### Infrastructure
-- **Kubernetes** - Container orchestration
-- **Docker** - Containerization
-- **Nginx** - Reverse proxy
+![Kubernetes](https://img.shields.io/badge/Kubernetes-1.28-326CE5?logo=kubernetes&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-24-2496ED?logo=docker&logoColor=white)
+![Nginx](https://img.shields.io/badge/Nginx-1.25-009639?logo=nginx&logoColor=white)
+
+</div>
 
 ---
 
@@ -150,6 +256,7 @@ kubectl port-forward -n devops-tracker svc/frontend-service 3000:3000
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    Kubernetes Cluster                        │
+│                   (Docker Desktop K8s)                       │
 │                                                              │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
 │  │   Frontend   │  │   Backend    │  │  PostgreSQL  │      │
@@ -157,42 +264,30 @@ kubectl port-forward -n devops-tracker svc/frontend-service 3000:3000
 │  │              │  │              │  │              │      │
 │  │ Nginx+React  │  │ Node+Express │  │  PostgreSQL  │      │
 │  │   Port 80    │  │  Port 5000   │  │  Port 5432   │      │
-│  └──────────────┘  └──────────────┘  └──────────────┘      │
-│         │                 │                   │             │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
+│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘      │
+│         │                 │                  │              │
+│  ┌──────▼───────┐  ┌──────▼───────┐  ┌──────▼───────┐      │
 │  │   Service    │  │   Service    │  │   Service    │      │
 │  │ LoadBalancer │  │  ClusterIP   │  │  ClusterIP   │      │
-│  └──────────────┘  └──────────────┘  └──────────────┘      │
-│         │                                     │             │
-│         │                              ┌──────────────┐     │
-│         │                              │     PVC      │     │
-│         │                              │  (10GB Data) │     │
-│         │                              └──────────────┘     │
-└─────────────────────────────────────────────────────────────┘
-         │
-         ▼
-   Port-Forward
-         │
-         ▼
-  http://localhost:3000
+│  └──────┬───────┘  └──────────────┘  └──────┬───────┘      │
+│         │                                    │              │
+│         │                             ┌──────▼───────┐      │
+│         │                             │     PVC      │      │
+│         │                             │  (10GB Data) │      │
+│         │                             └──────────────┘      │
+└─────────┼──────────────────────────────────────────────────┘
+          │
+          ▼ Port-Forward
+    http://localhost:3000
 ```
 
 ### Components
 
-**Frontend (2 replicas)**
-- Nginx serving React build
-- Port 80 internally, 3000 externally
-- LoadBalancer service
-
-**Backend (2 replicas)**
-- Node.js + Express API
-- Port 5000
-- ClusterIP service
-
-**PostgreSQL (StatefulSet)**
-- PostgreSQL 15 Alpine
-- 10GB persistent volume
-- Automatic initialization scripts
+| Component | Description | Replicas | Storage |
+|-----------|-------------|----------|---------|
+| **Frontend** | Nginx + React SPA | 2 | - |
+| **Backend** | Node.js + Express API | 2 | - |
+| **PostgreSQL** | Database (StatefulSet) | 1 | 10GB PVC |
 
 ---
 
@@ -200,49 +295,51 @@ kubectl port-forward -n devops-tracker svc/frontend-service 3000:3000
 
 ### Authentication
 
-#### Register
-```http
-POST /api/auth/register
-Content-Type: application/json
+<details>
+<summary><b>POST /api/auth/register</b> - Register new user</summary>
 
+```json
 {
   "username": "john_doe",
   "email": "john@example.com",
   "password": "SecurePass123!"
 }
 ```
+</details>
 
-#### Login
-```http
-POST /api/auth/login
-Content-Type: application/json
+<details>
+<summary><b>POST /api/auth/login</b> - Login user</summary>
 
+```json
 {
   "email": "john@example.com",
   "password": "SecurePass123!"
 }
 ```
+</details>
 
-#### Get Profile
-```http
-GET /api/auth/profile
+<details>
+<summary><b>GET /api/auth/profile</b> - Get user profile</summary>
+
+```bash
 Authorization: Bearer <token>
 ```
+</details>
 
 ### Tool Tracking
 
-#### Get All Tools
-```http
-GET /api/tools
+<details>
+<summary><b>GET /api/tools</b> - Get all tools</summary>
+
+```bash
 Authorization: Bearer <token>
 ```
+</details>
 
-#### Create Entry
-```http
-POST /api/tools/entries
-Authorization: Bearer <token>
-Content-Type: application/json
+<details>
+<summary><b>POST /api/tools/entries</b> - Create tool entry</summary>
 
+```json
 {
   "tool_id": 3,
   "date": "2026-05-02",
@@ -250,20 +347,23 @@ Content-Type: application/json
   "notes": "Learned Docker networking"
 }
 ```
+</details>
 
 ### Dashboard
 
-#### Get Stats
-```http
-GET /api/dashboard/stats
+<details>
+<summary><b>GET /api/dashboard/stats</b> - Get dashboard statistics</summary>
+
+```bash
 Authorization: Bearer <token>
 ```
+</details>
 
 ---
 
 ## 💻 Development
 
-### Local Development
+### Local Development Setup
 
 ```bash
 # Install dependencies
@@ -276,7 +376,7 @@ cd backend && npm run dev
 # Start frontend (Terminal 2)
 cd frontend && npm run dev
 
-# Start database (Terminal 3)
+# Port-forward database (Terminal 3)
 kubectl port-forward -n devops-tracker svc/postgres-service 5432:5432
 ```
 
@@ -303,16 +403,21 @@ VITE_API_URL=http://localhost:5000
 
 ## 🔧 Troubleshooting
 
-### Port Already in Use
+<details>
+<summary><b>Port Already in Use</b></summary>
+
 ```bash
-# Find process
+# Find process using port 3000
 lsof -i :3000
 
-# Kill process
+# Kill the process
 kill -9 <PID>
 ```
+</details>
 
-### Pods Not Starting
+<details>
+<summary><b>Pods Not Starting</b></summary>
+
 ```bash
 # Check pod status
 kubectl get pods -n devops-tracker
@@ -320,49 +425,80 @@ kubectl get pods -n devops-tracker
 # Check pod logs
 kubectl logs <pod-name> -n devops-tracker
 
-# Describe pod
+# Describe pod for events
 kubectl describe pod <pod-name> -n devops-tracker
 ```
+</details>
 
-### Database Connection Failed
+<details>
+<summary><b>Database Connection Failed</b></summary>
+
 ```bash
 # Check PostgreSQL logs
 kubectl logs postgres-0 -n devops-tracker
 
-# Restart PostgreSQL
+# Restart PostgreSQL pod
 kubectl delete pod postgres-0 -n devops-tracker
 ```
+</details>
 
-### Reset Everything
+<details>
+<summary><b>Reset Everything</b></summary>
+
 ```bash
 ./cleanup.sh
 ./start.sh
 ```
+</details>
 
 ---
 
 ## 📊 Resource Requirements
 
-- **CPU**: 2 cores minimum (4 recommended)
-- **Memory**: 4GB minimum (8GB recommended)
-- **Storage**: 15GB (10GB PostgreSQL + 5GB exports)
-- **Kubernetes**: v1.20+ (Docker Desktop Kubernetes)
+| Resource | Minimum | Recommended |
+|----------|---------|-------------|
+| **CPU** | 2 cores | 4 cores |
+| **Memory** | 4GB | 8GB |
+| **Storage** | 15GB | 20GB |
+| **Kubernetes** | v1.20+ | v1.28+ |
 
 ---
 
-## 🔒 Security
+## 🔒 Security Features
 
-- **Authentication**: JWT with 7-day expiration
-- **Password Hashing**: bcrypt with salt rounds
-- **SQL Injection**: Protected via parameterized queries
-- **XSS Protection**: React's built-in escaping
-- **CORS**: Configured for specific origins
+- ✅ **JWT Authentication** - 7-day token expiration
+- ✅ **Password Hashing** - bcrypt with salt rounds
+- ✅ **SQL Injection Protection** - Parameterized queries
+- ✅ **XSS Protection** - React's built-in escaping
+- ✅ **CORS** - Configured for specific origins
+- ✅ **HTTPS Ready** - SSL/TLS support
+
+---
+
+## 📚 Documentation
+
+- **Quick Start**: See above
+- **API Reference**: See API Documentation section
+- **Kubernetes Manifests**: `k8s/` directory
+- **Source Code**: `backend/` and `frontend/` directories
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ---
 
 ## 📝 License
 
-MIT License - Free to use for learning and portfolio purposes.
+This project is licensed under the MIT License - free to use for learning and portfolio purposes.
 
 ---
 
@@ -370,4 +506,14 @@ MIT License - Free to use for learning and portfolio purposes.
 
 Built with ❤️ using modern web technologies and Kubernetes best practices.
 
+<div align="center">
+
+**⭐ Star this repo if you find it helpful!**
+
 **Happy Learning! 🚀**
+
+---
+
+Made with 💙 by DevOps Enthusiasts
+
+</div>
