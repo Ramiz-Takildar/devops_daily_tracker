@@ -37,10 +37,15 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    const { token: newToken, user: userData } = await authService.login(email, password);
+    console.log('🔐 AuthContext: Starting login...');
+    const response = await authService.login(email, password);
+    console.log('📦 AuthContext: Login response:', response);
+    const { token: newToken, user: userData } = response;
+    console.log('💾 AuthContext: Storing token and user:', { token: newToken?.substring(0, 20) + '...', user: userData });
     localStorage.setItem('token', newToken);
     setToken(newToken);
     setUser(userData);
+    console.log('✅ AuthContext: Login complete, returning user:', userData);
     return userData;
   };
 

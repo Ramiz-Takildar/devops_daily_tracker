@@ -1,23 +1,27 @@
 import { NavLink } from 'react-router-dom';
 import {
   Award,
+  BarChart3,
   Bell,
   ChevronLeft,
   ChevronRight,
+  FileText,
   FolderKanban,
   Home,
+  LayoutDashboard,
   Settings,
   Sparkles,
   Target,
+  Users,
   Wrench,
   X,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
-const Sidebar = ({ isOpen, onClose, isCollapsed = false, onToggleCollapse }) => {
+const Sidebar = ({ isOpen, onClose, isCollapsed = false, onToggleCollapse, isAdmin = false }) => {
   const { user } = useAuth();
 
-  const navItems = [
+  const userNavItems = [
     { path: '/dashboard', icon: Home, label: 'Dashboard' },
     { path: '/tools', icon: Wrench, label: 'Tool Tracker' },
     { path: '/projects', icon: FolderKanban, label: 'Projects' },
@@ -27,6 +31,18 @@ const Sidebar = ({ isOpen, onClose, isCollapsed = false, onToggleCollapse }) => 
     { path: '/achievements', icon: Award, label: 'Achievements' },
     { path: '/tool-management', icon: Settings, label: 'Manage Tools' },
   ];
+
+  const adminNavItems = [
+    { path: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
+    { path: '/admin/users', icon: Users, label: 'Users' },
+    { path: '/admin/tools', icon: Wrench, label: 'Tools' },
+    { path: '/admin/projects', icon: FolderKanban, label: 'Projects' },
+    { path: '/admin/entries', icon: FileText, label: 'Entries' },
+    { path: '/admin/analytics', icon: BarChart3, label: 'Analytics' },
+    { path: '/admin/settings', icon: Settings, label: 'Settings' },
+  ];
+
+  const navItems = isAdmin ? adminNavItems : userNavItems;
 
   return (
     <>
@@ -48,13 +64,13 @@ const Sidebar = ({ isOpen, onClose, isCollapsed = false, onToggleCollapse }) => 
           <div className="flex items-center justify-between border-b border-theme px-4 py-5">
             <div className="flex min-w-0 items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,var(--accent),#8b5cf6)] shadow-lg shadow-sky-500/20">
-                <span className="text-lg font-bold text-white">D</span>
+                <span className="text-lg font-bold text-white">{isAdmin ? 'A' : 'D'}</span>
               </div>
               {!isCollapsed && (
                 <div className="min-w-0">
-                  <h1 className="truncate text-lg font-bold text-theme">DevOps</h1>
+                  <h1 className="truncate text-lg font-bold text-theme">{isAdmin ? 'Admin Portal' : 'DevOps'}</h1>
                   <p className="truncate text-xs uppercase tracking-[0.24em] text-theme-muted">
-                    Learning Tracker
+                    {isAdmin ? 'Management' : 'Learning Tracker'}
                   </p>
                 </div>
               )}

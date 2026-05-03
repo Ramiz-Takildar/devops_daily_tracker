@@ -22,6 +22,16 @@ const Achievements = lazy(() => import('./pages/Achievements'));
 const ToolManagement = lazy(() => import('./pages/ToolManagement'));
 const Profile = lazy(() => import('./pages/Profile'));
 
+// Lazy load admin pages
+const AdminLayout = lazy(() => import('./components/layout/AdminLayout'));
+const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
+const UserManagement = lazy(() => import('./pages/admin/UserManagement'));
+const AdminToolManagement = lazy(() => import('./pages/admin/ToolManagement'));
+const ProjectManagement = lazy(() => import('./pages/admin/ProjectManagement'));
+const EntryManagement = lazy(() => import('./pages/admin/EntryManagement'));
+const AdminAnalytics = lazy(() => import('./pages/admin/AdminAnalytics'));
+const AdminSettings = lazy(() => import('./pages/admin/AdminSettings'));
+
 function AppShell() {
   const { isDark } = useTheme();
 
@@ -58,6 +68,26 @@ function AppShell() {
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        {/* Admin Routes */}
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute requireAdmin>
+              <Suspense fallback={<LoadingSpinner />}>
+                <AdminLayout />
+              </Suspense>
+            </PrivateRoute>
+          }
+        >
+          <Route index element={<Suspense fallback={<LoadingSpinner />}><AdminDashboard /></Suspense>} />
+          <Route path="users" element={<Suspense fallback={<LoadingSpinner />}><UserManagement /></Suspense>} />
+          <Route path="tools" element={<Suspense fallback={<LoadingSpinner />}><AdminToolManagement /></Suspense>} />
+          <Route path="projects" element={<Suspense fallback={<LoadingSpinner />}><ProjectManagement /></Suspense>} />
+          <Route path="entries" element={<Suspense fallback={<LoadingSpinner />}><EntryManagement /></Suspense>} />
+          <Route path="analytics" element={<Suspense fallback={<LoadingSpinner />}><AdminAnalytics /></Suspense>} />
+          <Route path="settings" element={<Suspense fallback={<LoadingSpinner />}><AdminSettings /></Suspense>} />
+        </Route>
 
         {/* Private Routes with Suspense */}
         <Route

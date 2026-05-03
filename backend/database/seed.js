@@ -14,15 +14,30 @@ const seedDatabase = async () => {
     const passwordHash = await bcrypt.hash('Demo123!', 10);
     
     const userResult = await query(
-      `INSERT INTO users (username, email, password_hash)
-       VALUES ($1, $2, $3)
-       ON CONFLICT (email) DO UPDATE SET username = EXCLUDED.username
+      `INSERT INTO users (username, email, password_hash, role)
+       VALUES ($1, $2, $3, $4)
+       ON CONFLICT (email) DO UPDATE SET username = EXCLUDED.username, role = EXCLUDED.role
        RETURNING id`,
-      ['demo_user', 'demo@devopstracker.com', passwordHash]
+      ['demo_user', 'demo@devopstracker.com', passwordHash, 'user']
     );
 
     const userId = userResult.rows[0].id;
     console.log(`✅ Demo user created with ID: ${userId}`);
+
+    // Create admin user
+    console.log('Creating admin user...');
+    const adminPasswordHash = await bcrypt.hash('Admin123!', 10);
+    
+    const adminResult = await query(
+      `INSERT INTO users (username, email, password_hash, role)
+       VALUES ($1, $2, $3, $4)
+       ON CONFLICT (email) DO UPDATE SET username = EXCLUDED.username, role = EXCLUDED.role
+       RETURNING id`,
+      ['admin', 'admin@devopstracker.com', adminPasswordHash, 'admin']
+    );
+
+    const adminId = adminResult.rows[0].id;
+    console.log(`✅ Admin user created with ID: ${adminId}`);
 
     // Get tool IDs
     const toolsResult = await query('SELECT id, name FROM tools ORDER BY id');
@@ -69,8 +84,7 @@ const seedDatabase = async () => {
     for (const entry of entries) {
       await query(
         `INSERT INTO daily_entries (user_id, tool_id, date, hours_spent, notes)
-         VALUES ($1, $2, $3, $4, $5)
-         ON CONFLICT (user_id, tool_id, date) DO NOTHING`,
+         VALUES ($1, $2, $3, $4, $5)`,
         [entry.userId, entry.toolId, entry.date, entry.hours, entry.notes]
       );
     }

@@ -54,6 +54,7 @@ app.use('/api/goals', require('./routes/goals'));
 app.use('/api/achievements', require('./routes/achievements'));
 app.use('/api/export', require('./routes/export'));
 app.use('/api/insights', require('./routes/insights'));
+app.use('/api/admin', require('./routes/admin'));
 
 // 404 handler
 app.use((req, res) => {

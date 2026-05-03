@@ -6,9 +6,9 @@ const { body, validationResult } = require('express-validator');
 /**
  * Generate JWT token
  */
-const generateToken = (userId, email) => {
+const generateToken = (userId, email, role) => {
   return jwt.sign(
-    { userId, email },
+    { userId, email, role },
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
   );
@@ -51,14 +51,14 @@ const register = async (req, res) => {
     const result = await query(
       `INSERT INTO users (username, email, password_hash) 
        VALUES ($1, $2, $3) 
-       RETURNING id, username, email, created_at`,
+       RETURNING id, username, email, role, created_at`,
       [username, email, passwordHash]
     );
 
     const user = result.rows[0];
 
     // Generate token
-    const token = generateToken(user.id, user.email);
+    const token = generateToken(user.id, user.email, user.role);
 
     res.status(201).json({
       success: true,
@@ -98,7 +98,7 @@ const login = async (req, res) => {
 
     // Find user
     const result = await query(
-      'SELECT id, username, email, password_hash, is_active FROM users WHERE email = $1',
+      'SELECT id, username, email, password_hash, role, is_active FROM users WHERE email = $1',
       [email]
     );
 
@@ -135,7 +135,7 @@ const login = async (req, res) => {
     );
 
     // Generate token
-    const token = generateToken(user.id, user.email);
+    const token = generateToken(user.id, user.email, user.role);
 
     res.json({
       success: true,
@@ -144,7 +144,8 @@ const login = async (req, res) => {
       user: {
         id: user.id,
         username: user.username,
-        email: user.email
+        email: user.email,
+        role: user.role
       }
     });
   } catch (error) {
@@ -162,7 +163,7 @@ const login = async (req, res) => {
 const getCurrentUser = async (req, res) => {
   try {
     const result = await query(
-      `SELECT u.id, u.username, u.email, u.created_at, u.last_login,
+      `SELECT u.id, u.username, u.email, u.role, u.created_at, u.last_login,
               COALESCE(up.total_points, 0) as total_points,
               COALESCE(up.level, 1) as level,
               COALESCE(ls.current_streak, 0) as current_streak,
@@ -212,7 +213,7 @@ const logout = async (req, res) => {
 const getProfile = async (req, res) => {
   try {
     const result = await query(
-      `SELECT u.id, u.username, u.email, u.bio, u.avatar, u.created_at, u.last_login,
+      `SELECT u.id, u.username, u.email, u.role, u.bio, u.avatar, u.created_at, u.last_login,
               COALESCE(up.total_points, 0) as total_points,
               COALESCE(up.level, 1) as level,
               COALESCE(ls.current_streak, 0) as current_streak,

@@ -36,8 +36,8 @@ if ! kubectl cluster-info &> /dev/null; then
 fi
 
 echo -e "${BLUE}▶ Building Docker images...${NC}"
-cd frontend && docker build -t devops-tracker-frontend:1.0.0 . > /dev/null 2>&1
-cd ../backend && docker build -t devops-tracker-backend:1.0.0 . > /dev/null 2>&1
+cd frontend && docker build -t devops-tracker-frontend:latest . > /dev/null 2>&1
+cd ../backend && docker build -t devops-tracker-backend:latest . > /dev/null 2>&1
 cd ..
 echo -e "${GREEN}✓ Images built${NC}"
 
@@ -57,13 +57,17 @@ kubectl wait --for=condition=ready pod/postgres-0 -n devops-tracker --timeout=30
 kubectl apply -f backend-deployment.yaml > /dev/null
 kubectl apply -f backend-service.yaml > /dev/null
 
-echo -e "${YELLOW}  Waiting for Backend...${NC}"
+# Force backend pods to restart with latest image
+echo -e "${YELLOW}  Restarting backend with latest image...${NC}"
+kubectl delete pods -n devops-tracker -l app=backend > /dev/null 2>&1 || true
 kubectl wait --for=condition=available deployment/backend -n devops-tracker --timeout=300s > /dev/null
 
 kubectl apply -f frontend-deployment.yaml > /dev/null
 kubectl apply -f frontend-service.yaml > /dev/null
 
-echo -e "${YELLOW}  Waiting for Frontend...${NC}"
+# Force frontend pods to restart with latest image
+echo -e "${YELLOW}  Restarting frontend with latest image...${NC}"
+kubectl delete pods -n devops-tracker -l app=frontend > /dev/null 2>&1 || true
 kubectl wait --for=condition=available deployment/frontend -n devops-tracker --timeout=300s > /dev/null
 
 cd ..
@@ -74,18 +78,23 @@ sleep 2
 kubectl port-forward -n devops-tracker svc/frontend-service 3000:3000 > /dev/null 2>&1 &
 sleep 5
 
-echo -e "${BLUE}▶ Creating demo user...${NC}"
-curl -s -X POST http://localhost:3000/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"username":"demo","email":"demo@devopstracker.com","password":"Demo123!","full_name":"Demo User"}' > /dev/null 2>&1
+echo -e "${BLUE}▶ Seeding database with users and sample data...${NC}"
+echo -e "${YELLOW}  Creating admin and demo users with sample data...${NC}"
+BACKEND_POD=$(kubectl get pods -n devops-tracker -l app=backend -o jsonpath='{.items[0].metadata.name}')
+kubectl exec -n devops-tracker $BACKEND_POD -- node database/seed.js > /dev/null 2>&1
+echo -e "${GREEN}✓ Database seeded (admin + demo users with sample data)${NC}"
 
 echo -e "\n${GREEN}╔════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${GREEN}║              ✓ Deployment Complete!                       ║${NC}"
 echo -e "${GREEN}╚════════════════════════════════════════════════════════════╝${NC}\n"
 
-echo -e "${BLUE}🌐 Access:${NC} ${GREEN}http://localhost:3000${NC}"
-echo -e "${BLUE}📧 Email:${NC}  demo@devopstracker.com"
-echo -e "${BLUE}🔑 Pass:${NC}   Demo123!\n"
+echo -e "${BLUE}🌐 Access:${NC} ${GREEN}http://localhost:3000${NC}\n"
+echo -e "${BLUE}👤 Demo User:${NC}"
+echo -e "   📧 Email: demo@devopstracker.com"
+echo -e "   🔑 Pass:  Demo123!"
+echo -e "\n${BLUE}🔐 Admin User:${NC}"
+echo -e "   📧 Email: admin@devopstracker.com"
+echo -e "   🔑 Pass:  Admin123!\n"
 
 echo -e "${BLUE}📊 Status:${NC}"
 kubectl get pods -n devops-tracker

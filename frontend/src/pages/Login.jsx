@@ -12,6 +12,7 @@ const Login = () => {
   });
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const [copiedField, setCopiedField] = useState(null);
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -27,11 +28,23 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
 
+    console.log('🔐 Login attempt:', { email: formData.email });
+
     try {
-      await login(formData.email, formData.password);
+      console.log('📡 Calling login API...');
+      const userData = await login(formData.email, formData.password);
+      console.log('✅ Login successful:', userData);
       toast.success('Welcome back! 🚀');
-      navigate('/dashboard');
+      // Redirect based on user role
+      if (userData.role === 'admin') {
+        console.log('🔑 Admin user - redirecting to /admin');
+        navigate('/admin');
+      } else {
+        console.log('👤 Regular user - redirecting to /dashboard');
+        navigate('/dashboard');
+      }
     } catch (error) {
+      console.error('❌ Login error:', error);
       toast.error(error.response?.data?.error || 'Login failed. Please try again.');
     } finally {
       setLoading(false);
@@ -273,6 +286,33 @@ const Login = () => {
                   </div>
                 </motion.div>
 
+
+                {/* Remember Me Checkbox */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.75 }}
+                  className="flex items-center justify-between"
+                >
+                  <label className="flex items-center gap-2 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      checked={rememberMe}
+                      onChange={(e) => setRememberMe(e.target.checked)}
+                      className="w-4 h-4 rounded border-white/20 bg-white/5 text-blue-500 focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-0 cursor-pointer"
+                    />
+                    <span className="text-sm text-slate-300 group-hover:text-white transition-colors">
+                      Remember me
+                    </span>
+                  </label>
+                  <Link
+                    to="/forgot-password"
+                    className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                  >
+                    Forgot password?
+                  </Link>
+                </motion.div>
+
                 {/* Submit Button */}
                 <motion.button
                   initial={{ opacity: 0, y: 20 }}
@@ -356,57 +396,7 @@ const Login = () => {
             </div>
           </motion.div>
 
-          {/* Demo Credentials Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2 }}
-            className="mt-6 backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-5"
-          >
-            <div className="flex items-start gap-3 mb-3">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-blue-400" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-sm font-semibold text-white mb-1">Demo Credentials</h3>
-                <p className="text-xs text-slate-400">Try the app with pre-filled demo account</p>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between p-2 bg-white/5 rounded-lg group">
-                <div className="flex-1">
-                  <p className="text-xs text-slate-400">Email</p>
-                  <p className="text-sm text-white font-mono">demo@devopstracker.com</p>
-                </div>
-                <button
-                  onClick={() => copyToClipboard('demo@devopstracker.com', 'email')}
-                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                >
-                  {copiedField === 'email' ? (
-                    <Check className="w-4 h-4 text-green-400" />
-                  ) : (
-                    <Copy className="w-4 h-4 text-slate-400" />
-                  )}
-                </button>
-              </div>
-              <div className="flex items-center justify-between p-2 bg-white/5 rounded-lg group">
-                <div className="flex-1">
-                  <p className="text-xs text-slate-400">Password</p>
-                  <p className="text-sm text-white font-mono">Demo123!</p>
-                </div>
-                <button
-                  onClick={() => copyToClipboard('Demo123!', 'password')}
-                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                >
-                  {copiedField === 'password' ? (
-                    <Check className="w-4 h-4 text-green-400" />
-                  ) : (
-                    <Copy className="w-4 h-4 text-slate-400" />
-                  )}
-                </button>
-              </div>
-            </div>
-          </motion.div>
+
         </motion.div>
       </div>
     </div>
