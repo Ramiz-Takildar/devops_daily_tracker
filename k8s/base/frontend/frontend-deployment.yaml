@@ -27,7 +27,7 @@ spec:
       containers:
       - name: frontend
         image: devops-tracker-frontend:latest
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
           name: http

@@ -27,7 +27,7 @@ spec:
       containers:
       - name: backend
         image: devops-tracker-backend:latest
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5000
           name: http
