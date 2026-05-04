@@ -1,519 +1,365 @@
-# 🚀 DevOps Daily Tracker
+# DevOps Daily Tracker
 
-<div align="center">
+A comprehensive full-stack application for tracking daily DevOps learning, tools, projects, and achievements. Deployed using GitOps principles with ArgoCD on Kubernetes.
 
-![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Kubernetes](https://img.shields.io/badge/kubernetes-ready-brightgreen.svg)
-![Docker](https://img.shields.io/badge/docker-ready-blue.svg)
-
-**A comprehensive, production-ready web application for tracking your DevOps learning journey**
-
-*Real-time analytics • Progress visualization • Achievement tracking • Kubernetes native*
-
-[Quick Start](#-quick-start) • [Features](#-features) • [Screenshots](#-screenshots) • [Documentation](#-documentation)
-
-</div>
-
----
-
-## 📸 Screenshots
-
-<div align="center">
-
-### 🎯 Dashboard - Your Learning Hub
-![Dashboard](screenshots/dashboard.png)
-*Real-time statistics, weekly heatmap, and smart insights at a glance*
-
-### 📊 Tool Tracker - Log Your Progress
-![Tool Tracker](screenshots/tool-tracker.png)
-*Track hours spent on Docker, Kubernetes, AWS, and more*
-
-### 📈 Analytics - Visualize Your Growth
-![Analytics](screenshots/analytics.png)
-*Interactive charts showing your learning patterns and trends*
-
-### 🏆 Achievements - Celebrate Milestones
-![Achievements](screenshots/achievement.png)
-*Unlock badges and track your accomplishments*
-
-### 🔐 Secure Authentication
-![Login](screenshots/login.png)
-*JWT-based secure login with modern UI*
-
-</div>
-
----
-
-## 🎯 Overview
-
-**DevOps Daily Tracker** is a modern, full-stack web application designed to help DevOps engineers, students, and professionals track their learning progress across various tools and technologies. Built with React, Node.js, and PostgreSQL, deployed on **Kubernetes** for production-grade reliability.
-
-### ✨ Why Choose DevOps Daily Tracker?
-
-<table>
-<tr>
-<td width="50%">
-
-**📊 Comprehensive Tracking**
-- Log daily hours for 8+ DevOps tools
-- Multiple entries per day
-- Add notes and context
-- Real-time proficiency calculation
-
-**🎯 Goal Management**
-- Set learning goals with deadlines
-- Track progress visually
-- Get milestone notifications
-- Celebrate achievements
-
-</td>
-<td width="50%">
-
-**📈 Smart Analytics**
-- Interactive charts and graphs
-- Time distribution analysis
-- Weekly/monthly comparisons
-- Export as CSV/PDF
-
-**☸️ Kubernetes Native**
-- Production-ready deployment
-- Auto-scaling capabilities
-- Persistent data storage
-- High availability
-
-</td>
-</tr>
-</table>
-
----
+[![CI/CD](https://github.com/Ramiz-Takildar/devops_daily_tracker/actions/workflows/frontend-ci-cd.yaml/badge.svg)](https://github.com/Ramiz-Takildar/devops_daily_tracker/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 🚀 Quick Start
 
 ### Prerequisites
+- Docker Desktop with Kubernetes enabled
+- kubectl CLI tool
+- Git
 
-- **Docker Desktop** with Kubernetes enabled
-- **kubectl** installed
-- **8GB RAM** minimum
+### One-Command Deployment
 
-### Deploy in One Command
-
-```bash
-# Clone repository
-git clone <repository-url>
-cd devops_daily_tracker
-
-# Start application
-./start.sh
-```
-
-**🎉 That's it!** Your application is now running.
-
-**Access:** http://localhost:3000
-
-**Demo Account:**
-```
-Email:    demo@devopstracker.com
-Password: Demo123!
-```
-
----
-
-## 📝 Commands
-
-<table>
-<tr>
-<td width="33%">
-
-### 🚀 Start
-```bash
-./start.sh
-```
-Builds images, deploys to Kubernetes, creates demo user
-
-</td>
-<td width="33%">
-
-### 🛑 Stop
-```bash
-./stop.sh
-```
-Stops all pods, **preserves data**
-
-</td>
-<td width="33%">
-
-### 🧹 Cleanup
-```bash
-./cleanup.sh
-```
-**Removes everything** including database
-
-</td>
-</tr>
-</table>
-
-### Additional Commands
+Deploy the entire application stack with ArgoCD:
 
 ```bash
-# View all resources
-kubectl get all -n devops-tracker
-
-# View logs
-kubectl logs -n devops-tracker -l app=frontend -f
-kubectl logs -n devops-tracker -l app=backend -f
-kubectl logs -n devops-tracker postgres-0 -f
-
-# Restart port-forward
-kubectl port-forward -n devops-tracker svc/frontend-service 3000:3000
+./start-argocd.sh
 ```
 
----
+This script will:
+1. Install ArgoCD in your Kubernetes cluster
+2. Deploy all three environments (dev, staging, production)
+3. Seed the database with demo users
+4. Set up port-forwarding for easy access
 
-## ✨ Features
+### Access the Application
 
-<table>
-<tr>
-<td width="50%">
+After deployment completes:
 
-### 🎯 Core Features
+- **Frontend (Dev)**: http://localhost:3000
+- **ArgoCD UI**: https://localhost:8080
+- **ArgoCD Credentials**: `admin` / `bRa23aWpZvfEAAy0`
 
-**Tool Tracking**
-- 8+ predefined DevOps tools
-- Custom time logging
-- Notes and context
-- Proficiency levels
+### Demo Credentials
 
-**Dashboard**
-- Real-time statistics
-- Weekly activity heatmap
-- Tool proficiency overview
-- Recent activity feed
-- Smart insights
+- **Demo User**: `demo@devopstracker.com` / `Demo123!`
+- **Admin User**: `admin@devopstracker.com` / `Admin123!`
 
-**Analytics**
-- Interactive charts
-- Time distribution
-- Tool usage trends
-- Export capabilities
+## 📋 Features
 
-</td>
-<td width="50%">
+### Core Functionality
+- ✅ **Daily Learning Tracker**: Log daily DevOps learning activities
+- ✅ **Tool Management**: Track DevOps tools and technologies
+- ✅ **Project Tracking**: Monitor project progress and milestones
+- ✅ **Goal Setting**: Set and track learning goals
+- ✅ **Achievement System**: Gamification with badges and rewards
+- ✅ **Analytics Dashboard**: Visualize learning progress
+- ✅ **Smart Insights**: AI-powered learning recommendations
+- ✅ **Export Functionality**: Export data to CSV/PDF
 
-### 🏆 Advanced Features
+### Technical Features
+- ✅ **GitOps Deployment**: Automated deployment with ArgoCD
+- ✅ **Multi-Environment**: Dev, Staging, Production environments
+- ✅ **CI/CD Pipeline**: Automated testing and deployment
+- ✅ **Container Orchestration**: Kubernetes-native deployment
+- ✅ **Auto-Scaling**: Horizontal Pod Autoscaler (production)
+- ✅ **High Availability**: Multiple replicas with health checks
+- ✅ **Persistent Storage**: StatefulSet for PostgreSQL
+- ✅ **Security**: JWT authentication, RBAC, network policies
 
-**Project Management**
-- Create DevOps projects
-- Track progress
-- Link tools to projects
-- Status management
+## 🏗️ Architecture
 
-**Goals & Achievements**
-- Set learning goals
-- Track milestones
-- Unlock badges
-- Gamification
+### Technology Stack
 
-**Profile Management**
-- Upload avatar
-- Edit information
-- Change password
-- View statistics
+**Frontend**
+- React 18 with Vite
+- Tailwind CSS
+- React Context API
+- Axios for API calls
+- Nginx reverse proxy
 
-</td>
-</tr>
-</table>
+**Backend**
+- Node.js 20
+- Express.js
+- PostgreSQL 15
+- JWT authentication
+- RESTful API
 
----
+**Infrastructure**
+- Kubernetes (Docker Desktop)
+- ArgoCD for GitOps
+- GitHub Actions for CI/CD
+- Docker Hub for container registry
+- Kustomize for configuration management
 
-## 🛠 Tech Stack
-
-<div align="center">
-
-### Frontend
-![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)
-![Tailwind](https://img.shields.io/badge/Tailwind-3-38B2AC?logo=tailwind-css&logoColor=white)
-![Framer](https://img.shields.io/badge/Framer_Motion-10-0055FF?logo=framer&logoColor=white)
-
-### Backend
-![Node.js](https://img.shields.io/badge/Node.js-20-339933?logo=node.js&logoColor=white)
-![Express](https://img.shields.io/badge/Express-4-000000?logo=express&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?logo=postgresql&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-Auth-000000?logo=json-web-tokens&logoColor=white)
-
-### Infrastructure
-![Kubernetes](https://img.shields.io/badge/Kubernetes-1.28-326CE5?logo=kubernetes&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-24-2496ED?logo=docker&logoColor=white)
-![Nginx](https://img.shields.io/badge/Nginx-1.25-009639?logo=nginx&logoColor=white)
-
-</div>
-
----
-
-## 🏗 Architecture
+### Deployment Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    Kubernetes Cluster                        │
-│                   (Docker Desktop K8s)                       │
-│                                                              │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
-│  │   Frontend   │  │   Backend    │  │  PostgreSQL  │      │
-│  │  (2 replicas)│  │  (2 replicas)│  │ (StatefulSet)│      │
-│  │              │  │              │  │              │      │
-│  │ Nginx+React  │  │ Node+Express │  │  PostgreSQL  │      │
-│  │   Port 80    │  │  Port 5000   │  │  Port 5432   │      │
-│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘      │
-│         │                 │                  │              │
-│  ┌──────▼───────┐  ┌──────▼───────┐  ┌──────▼───────┐      │
-│  │   Service    │  │   Service    │  │   Service    │      │
-│  │ LoadBalancer │  │  ClusterIP   │  │  ClusterIP   │      │
-│  └──────┬───────┘  └──────────────┘  └──────┬───────┘      │
-│         │                                    │              │
-│         │                             ┌──────▼───────┐      │
-│         │                             │     PVC      │      │
-│         │                             │  (10GB Data) │      │
-│         │                             └──────────────┘      │
-└─────────┼──────────────────────────────────────────────────┘
-          │
-          ▼ Port-Forward
-    http://localhost:3000
+GitHub → GitHub Actions → Docker Hub → ArgoCD → Kubernetes
+   ↓           ↓              ↓           ↓          ↓
+ Code      Build/Test      Images     GitOps    Deployment
 ```
 
-### Components
+For detailed architecture documentation, see [ARCHITECTURE.md](./ARCHITECTURE.md)
 
-| Component | Description | Replicas | Storage |
-|-----------|-------------|----------|---------|
-| **Frontend** | Nginx + React SPA | 2 | - |
-| **Backend** | Node.js + Express API | 2 | - |
-| **PostgreSQL** | Database (StatefulSet) | 1 | 10GB PVC |
+## 🔧 Management Commands
 
----
+### Start Everything
+```bash
+./start-argocd.sh
+```
 
-## 🔌 API Documentation
+### Stop Port-Forwarding (Keep Apps Running)
+```bash
+./stop-argocd.sh
+```
+
+### Cleanup Everything
+```bash
+./cleanup-argocd.sh
+```
+
+### Manual Operations
+
+**Check Application Status**
+```bash
+kubectl get pods -n devops-tracker-dev
+kubectl get pods -n devops-tracker-staging
+kubectl get pods -n devops-tracker-prod
+```
+
+**View Logs**
+```bash
+# Frontend logs
+kubectl logs -n devops-tracker-dev -l app=devops-tracker,component=web --tail=50
+
+# Backend logs
+kubectl logs -n devops-tracker-dev -l app=devops-tracker,component=api --tail=50
+
+# Database logs
+kubectl logs -n devops-tracker-dev postgres-dev-0 --tail=50
+```
+
+**Access ArgoCD CLI**
+```bash
+argocd login localhost:8080 --username admin --password bRa23aWpZvfEAAy0 --insecure
+argocd app list
+argocd app sync devops-tracker-dev
+```
+
+## 🔄 Development Workflow
+
+### Making Changes
+
+1. **Make code changes** in your local repository
+2. **Commit and push** to the appropriate branch:
+   - `develop` → Development environment (auto-deploys)
+   - `staging` → Staging environment (manual sync)
+   - `main` → Production environment (manual sync)
+
+3. **GitHub Actions** automatically:
+   - Runs tests and linting
+   - Builds Docker images
+   - Pushes to Docker Hub with appropriate tags
+
+4. **ArgoCD** automatically (for dev) or manually (for staging/prod):
+   - Detects changes in Git repository
+   - Syncs Kubernetes manifests
+   - Pulls latest images
+   - Deploys to cluster
+
+### Branch Strategy
+
+- `develop` → Development environment (auto-sync enabled)
+- `staging` → Staging environment (manual sync)
+- `main` → Production environment (manual sync)
+
+### CI/CD Pipeline
+
+**On Push to Any Branch:**
+1. Lint and test code
+2. Build Docker images
+3. Tag images appropriately:
+   - `develop` → `dev-latest`
+   - `staging` → `staging-latest`
+   - `main` → `prod-latest`
+4. Push to Docker Hub
+
+**ArgoCD Sync:**
+- Development: Automatic (every 3 minutes)
+- Staging: Manual approval required
+- Production: Manual approval required
+
+## 📦 Project Structure
+
+```
+devops_daily_tracker/
+├── .github/
+│   └── workflows/           # GitHub Actions CI/CD pipelines
+├── argocd/
+│   ├── applications/        # ArgoCD application definitions
+│   └── projects/            # ArgoCD project definitions
+├── backend/
+│   ├── config/              # Database configuration
+│   ├── controllers/         # API controllers
+│   ├── database/            # Database migrations and seeds
+│   ├── middleware/          # Authentication middleware
+│   ├── routes/              # API routes
+│   ├── services/            # Business logic
+│   └── server.js            # Express server
+├── frontend/
+│   ├── public/              # Static assets
+│   ├── src/
+│   │   ├── components/      # React components
+│   │   ├── context/         # React context providers
+│   │   ├── pages/           # Page components
+│   │   ├── services/        # API services
+│   │   └── utils/           # Utility functions
+│   └── nginx.conf           # Nginx configuration
+├── k8s/
+│   ├── base/                # Base Kubernetes manifests
+│   └── overlays/            # Environment-specific overlays
+│       ├── dev/
+│       ├── staging/
+│       └── production/
+├── screenshots/             # Application screenshots
+├── start-argocd.sh          # One-command deployment script
+├── stop-argocd.sh           # Stop port-forwarding script
+├── cleanup-argocd.sh        # Cleanup script
+├── ARCHITECTURE.md          # Detailed architecture documentation
+├── ARGOCD_QUICK_START.md    # ArgoCD quick reference
+└── README.md                # This file
+```
+
+## 🔐 Security
 
 ### Authentication
+- JWT-based authentication
+- Bcrypt password hashing
+- Token expiration and refresh
+- Role-based access control (Admin/User)
 
-<details>
-<summary><b>POST /api/auth/register</b> - Register new user</summary>
+### Network Security
+- Internal ClusterIP services
+- Network policies (production)
+- TLS/SSL for external access (production)
 
-```json
-{
-  "username": "john_doe",
-  "email": "john@example.com",
-  "password": "SecurePass123!"
-}
-```
-</details>
+### Secrets Management
+- Kubernetes Secrets for sensitive data
+- Environment-specific configurations
+- No secrets in Git repository
 
-<details>
-<summary><b>POST /api/auth/login</b> - Login user</summary>
+## 📊 Monitoring & Observability
 
-```json
-{
-  "email": "john@example.com",
-  "password": "SecurePass123!"
-}
-```
-</details>
+### Health Checks
+- Liveness probes for all pods
+- Readiness probes for traffic management
+- Startup probes for slow-starting containers
 
-<details>
-<summary><b>GET /api/auth/profile</b> - Get user profile</summary>
+### Logging
+- Structured JSON logging
+- Centralized log collection via kubectl
+- Application and system logs
 
+### Metrics (Future)
+- Prometheus for metrics collection
+- Grafana for visualization
+- Custom application metrics
+
+## 🎯 Environments
+
+### Development
+- **Namespace**: `devops-tracker-dev`
+- **Replicas**: 1 per service
+- **Auto-sync**: Enabled
+- **Purpose**: Active development and testing
+
+### Staging
+- **Namespace**: `devops-tracker-staging`
+- **Replicas**: 2 per service
+- **Auto-sync**: Disabled (manual)
+- **Purpose**: Pre-production testing
+
+### Production
+- **Namespace**: `devops-tracker-prod`
+- **Replicas**: 3 per service
+- **Auto-sync**: Disabled (manual)
+- **Features**: HPA, PDB, Network Policies, Resource Limits
+- **Purpose**: Live production environment
+
+## 🐛 Troubleshooting
+
+### Pods Not Starting
 ```bash
-Authorization: Bearer <token>
+kubectl describe pod <pod-name> -n <namespace>
+kubectl logs <pod-name> -n <namespace>
 ```
-</details>
 
-### Tool Tracking
-
-<details>
-<summary><b>GET /api/tools</b> - Get all tools</summary>
-
+### ArgoCD Sync Issues
 ```bash
-Authorization: Bearer <token>
+argocd app get devops-tracker-dev
+argocd app sync devops-tracker-dev --force
 ```
-</details>
 
-<details>
-<summary><b>POST /api/tools/entries</b> - Create tool entry</summary>
-
-```json
-{
-  "tool_id": 3,
-  "date": "2026-05-02",
-  "hours_spent": 2.5,
-  "notes": "Learned Docker networking"
-}
-```
-</details>
-
-### Dashboard
-
-<details>
-<summary><b>GET /api/dashboard/stats</b> - Get dashboard statistics</summary>
-
+### Database Connection Issues
 ```bash
-Authorization: Bearer <token>
+kubectl exec -it postgres-dev-0 -n devops-tracker-dev -- psql -U devops_user -d devops_tracker
 ```
-</details>
 
----
-
-## 💻 Development
-
-### Local Development Setup
-
+### Port-Forward Not Working
 ```bash
-# Install dependencies
-cd frontend && npm install
-cd ../backend && npm install
+# Kill existing port-forwards
+pkill -f "kubectl port-forward"
 
-# Start backend (Terminal 1)
-cd backend && npm run dev
-
-# Start frontend (Terminal 2)
-cd frontend && npm run dev
-
-# Port-forward database (Terminal 3)
-kubectl port-forward -n devops-tracker svc/postgres-service 5432:5432
+# Restart port-forwards
+./start-argocd.sh
 ```
-
-### Environment Variables
-
-**Backend (.env)**
-```env
-PORT=5000
-NODE_ENV=development
-JWT_SECRET=your-secret-key
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=devops_tracker
-DB_USER=devops_user
-DB_PASSWORD=devops_pass
-```
-
-**Frontend (.env)**
-```env
-VITE_API_URL=http://localhost:5000
-```
-
----
-
-## 🔧 Troubleshooting
-
-<details>
-<summary><b>Port Already in Use</b></summary>
-
-```bash
-# Find process using port 3000
-lsof -i :3000
-
-# Kill the process
-kill -9 <PID>
-```
-</details>
-
-<details>
-<summary><b>Pods Not Starting</b></summary>
-
-```bash
-# Check pod status
-kubectl get pods -n devops-tracker
-
-# Check pod logs
-kubectl logs <pod-name> -n devops-tracker
-
-# Describe pod for events
-kubectl describe pod <pod-name> -n devops-tracker
-```
-</details>
-
-<details>
-<summary><b>Database Connection Failed</b></summary>
-
-```bash
-# Check PostgreSQL logs
-kubectl logs postgres-0 -n devops-tracker
-
-# Restart PostgreSQL pod
-kubectl delete pod postgres-0 -n devops-tracker
-```
-</details>
-
-<details>
-<summary><b>Reset Everything</b></summary>
-
-```bash
-./cleanup.sh
-./start.sh
-```
-</details>
-
----
-
-## 📊 Resource Requirements
-
-| Resource | Minimum | Recommended |
-|----------|---------|-------------|
-| **CPU** | 2 cores | 4 cores |
-| **Memory** | 4GB | 8GB |
-| **Storage** | 15GB | 20GB |
-| **Kubernetes** | v1.20+ | v1.28+ |
-
----
-
-## 🔒 Security Features
-
-- ✅ **JWT Authentication** - 7-day token expiration
-- ✅ **Password Hashing** - bcrypt with salt rounds
-- ✅ **SQL Injection Protection** - Parameterized queries
-- ✅ **XSS Protection** - React's built-in escaping
-- ✅ **CORS** - Configured for specific origins
-- ✅ **HTTPS Ready** - SSL/TLS support
-
----
 
 ## 📚 Documentation
 
-- **Quick Start**: See above
-- **API Reference**: See API Documentation section
-- **Kubernetes Manifests**: `k8s/` directory
-- **Source Code**: `backend/` and `frontend/` directories
-
----
+- [Architecture Documentation](./ARCHITECTURE.md) - Detailed system architecture
+- [ArgoCD Quick Start](./ARGOCD_QUICK_START.md) - ArgoCD reference guide
+- [Quick Start Guide](./QUICK_START.md) - Getting started guide
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
-
----
 
 ## 📝 License
 
-This project is licensed under the MIT License - free to use for learning and portfolio purposes.
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 👥 Authors
+
+- **Ramiz Takildar** - [GitHub](https://github.com/Ramiz-Takildar)
+
+## 🙏 Acknowledgments
+
+- ArgoCD for GitOps automation
+- Kubernetes community
+- React and Node.js communities
+- All contributors and users
+
+## 📞 Support
+
+For issues and questions:
+- Open an issue on GitHub
+- Check existing documentation
+- Review ArgoCD logs and application status
+
+## 🔮 Roadmap
+
+- [ ] Implement Prometheus + Grafana monitoring
+- [ ] Add distributed tracing
+- [ ] Implement service mesh (Istio)
+- [ ] Add automated database backups
+- [ ] Implement blue-green deployments
+- [ ] Add canary deployments
+- [ ] External secrets management (Vault)
+- [ ] API rate limiting
+- [ ] Redis caching layer
+- [ ] CDN for static assets
 
 ---
 
-## 🎉 Acknowledgments
+**Built with ❤️ using GitOps principles**
 
-Built with ❤️ using modern web technologies and Kubernetes best practices.
-
-<div align="center">
-
-**⭐ Star this repo if you find it helpful!**
-
-**Happy Learning! 🚀**
-
----
-
-Made with 💙 by DevOps Enthusiasts
-
-</div>
+**Last Updated**: May 4, 2026
