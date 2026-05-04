@@ -16,7 +16,8 @@ spec:
     protocol: TCP
     name: http
   selector:
-    app: backend
+    app: devops-tracker
+    component: api
   # Session affinity for consistent API connections
   sessionAffinity: ClientIP
   sessionAffinityConfig:
