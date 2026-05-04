@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  NODE_ENV: "development"
+  DB_HOST: "postgres-service-dev"
+  FRONTEND_URL: "http://localhost:3000,http://localhost:3001"

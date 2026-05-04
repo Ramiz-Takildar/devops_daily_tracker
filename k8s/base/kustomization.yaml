@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: devops-tracker
+
+resources:
+  - namespace.yaml
+  - configmaps.yaml
+  - secrets.yaml
+  - persistent-volumes.yaml
+  - postgres/postgres-statefulset.yaml
+  - postgres/postgres-service.yaml
+  - backend/backend-deployment.yaml
+  - backend/backend-service.yaml
+  - frontend/frontend-deployment.yaml
+  - frontend/frontend-service.yaml
+
+commonLabels:
+  app: devops-tracker
+  managed-by: argocd
+
+images:
+  - name: devops-tracker-backend
+    newName: ramiztakildar/devops-tracker-backend
+    newTag: latest
+  - name: devops-tracker-frontend
+    newName: ramiztakildar/devops-tracker-frontend
+    newTag: latest

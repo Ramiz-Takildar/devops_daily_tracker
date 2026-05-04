@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: devops-tracker-staging
+
+bases:
+  - ../../base
+
+nameSuffix: -staging
+
+patchesStrategicMerge:
+  - namespace-patch.yaml
+  - configmap-patch.yaml
+  - replica-patch.yaml
+
+images:
+  - name: devops-tracker-backend
+    newName: ramiztakildar/devops-tracker-backend
+    newTag: staging-latest
+  - name: devops-tracker-frontend
+    newName: ramiztakildar/devops-tracker-frontend
+    newTag: staging-latest

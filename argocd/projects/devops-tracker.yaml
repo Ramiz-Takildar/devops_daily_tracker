@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: devops-tracker
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: DevOps Daily Tracker Application Project
+  
+  sourceRepos:
+    - '*'  # Allow all repositories
+  
+  destinations:
+    - namespace: 'devops-tracker-*'
+      server: 'https://kubernetes.default.svc'
+    - namespace: 'argocd'
+      server: 'https://kubernetes.default.svc'
+  
+  clusterResourceWhitelist:
+    - group: ''
+      kind: Namespace
+    - group: ''
+      kind: PersistentVolume
+    - group: 'rbac.authorization.k8s.io'
+      kind: ClusterRole
+    - group: 'rbac.authorization.k8s.io'
+      kind: ClusterRoleBinding
+  
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  
+  roles:
+    - name: developer
+      description: Developer role with sync permissions
+      policies:
+        - p, proj:devops-tracker:developer, applications, sync, devops-tracker/*, allow
+        - p, proj:devops-tracker:developer, applications, get, devops-tracker/*, allow
+        - p, proj:devops-tracker:developer, applications, override, devops-tracker/*, allow
+      groups:
+        - developers
+    
+    - name: admin
+      description: Admin role with full permissions
+      policies:
+        - p, proj:devops-tracker:admin, applications, *, devops-tracker/*, allow
+      groups:
+        - admins

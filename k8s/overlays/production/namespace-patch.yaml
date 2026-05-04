@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: devops-tracker
+  labels:
+    environment: production
+    managed-by: argocd
