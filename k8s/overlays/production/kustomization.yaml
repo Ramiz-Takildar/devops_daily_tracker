@@ -3,21 +3,19 @@ kind: Kustomization
 
 namespace: devops-tracker-prod
 
-bases:
-  - ../../base
-
-nameSuffix: -prod
-
-patchesStrategicMerge:
-  - namespace-patch.yaml
-  - configmap-patch.yaml
-  - replica-patch.yaml
-  - resource-limits.yaml
-
 resources:
+  - ../../base
   - hpa.yaml
   - network-policy.yaml
   - pdb.yaml
+
+nameSuffix: -prod
+
+patches:
+  - path: namespace-patch.yaml
+  - path: configmap-patch.yaml
+  - path: replica-patch.yaml
+  - path: resource-limits.yaml
 
 images:
   - name: devops-tracker-backend

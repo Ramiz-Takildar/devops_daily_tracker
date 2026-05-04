@@ -3,15 +3,15 @@ kind: Kustomization
 
 namespace: devops-tracker-dev
 
-bases:
+resources:
   - ../../base
 
 nameSuffix: -dev
 
-patchesStrategicMerge:
-  - namespace-patch.yaml
-  - configmap-patch.yaml
-  - replica-patch.yaml
+patches:
+  - path: namespace-patch.yaml
+  - path: configmap-patch.yaml
+  - path: replica-patch.yaml
 
 images:
   - name: devops-tracker-backend
