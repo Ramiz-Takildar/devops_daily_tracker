@@ -12,3 +12,4 @@ build
 README.md
 .DS_Store
 package-lock.json
+# Trigger rebuild
