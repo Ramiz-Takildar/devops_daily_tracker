@@ -19,4 +19,4 @@ images:
     newTag: dev-latest
   - name: devops-tracker-frontend
     newName: ramiztakildar/devops-tracker-frontend
-    newTag: develop-761a9a7
+    newTag: develop-d30eb53
