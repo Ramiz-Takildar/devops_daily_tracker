@@ -12,6 +12,10 @@ spec:
     repoURL: 'https://github.com/Ramiz-Takildar/devops_daily_tracker'
     targetRevision: develop
     path: k8s/overlays/dev
+    kustomize:
+      images:
+        - ramiztakildar/devops-tracker-backend:dev-latest
+        - ramiztakildar/devops-tracker-frontend:dev-latest
   
   destination:
     server: 'https://kubernetes.default.svc'
