@@ -1,0 +1,4 @@
+{"id":"1ed9420e-7380-4e58-80b4-ffdf88d947df","ts":"2026-05-04T03:31:15.602Z","path":"/Users/ramijtakildar/backup_k8-devops_daily_tracker/devops_daily_tracker/start-argocd.sh","version":"1.0.0","taskID":"70d7788d-0667-4383-9167-d77d133def28"}
+{"id":"8b5f860b-6397-441d-8ab4-c80aed927459","ts":"2026-05-04T03:31:26.872Z","path":"/Users/ramijtakildar/backup_k8-devops_daily_tracker/devops_daily_tracker/stop-argocd.sh","version":"1.0.0","taskID":"70d7788d-0667-4383-9167-d77d133def28"}
+{"id":"3be8ef31-dda2-408a-8e6c-b050e0f5ee20","ts":"2026-05-04T03:31:41.657Z","path":"/Users/ramijtakildar/backup_k8-devops_daily_tracker/devops_daily_tracker/cleanup-argocd.sh","version":"1.0.0","taskID":"70d7788d-0667-4383-9167-d77d133def28"}
+{"id":"8f4bd2d7-15c5-48c7-ba71-cb6b25dbd56f","ts":"2026-05-04T03:32:30.146Z","path":"/Users/ramijtakildar/backup_k8-devops_daily_tracker/devops_daily_tracker/ARGOCD_QUICK_START.md","version":"1.0.0","taskID":"70d7788d-0667-4383-9167-d77d133def28"}
