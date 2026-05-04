@@ -5,7 +5,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: postgres
-  namespace: devops-tracker
   labels:
     app: postgres
     component: database
