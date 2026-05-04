@@ -12,9 +12,26 @@ A comprehensive full-stack application for tracking daily DevOps learning, tools
 - kubectl CLI tool
 - Git
 
-### One-Command Deployment
+### Automated Setup (Recommended for New Systems)
 
-Deploy the entire application stack with ArgoCD:
+Run the interactive setup script that checks prerequisites and deploys everything:
+
+```bash
+./setup.sh
+```
+
+This script will:
+- ✅ Check all prerequisites (Docker, kubectl, git, Kubernetes)
+- ✅ Verify Kubernetes cluster is running
+- ✅ Install ArgoCD if not present
+- ✅ Deploy all three environments
+- ✅ Seed database with demo users
+- ✅ Set up port-forwarding
+- ✅ Display access information
+
+### Manual Deployment
+
+If you prefer manual deployment or already have prerequisites:
 
 ```bash
 ./start-argocd.sh
