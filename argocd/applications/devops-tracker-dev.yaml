@@ -10,7 +10,7 @@ spec:
   
   source:
     repoURL: 'https://github.com/Ramiz-Takildar/devops_daily_tracker'
-    targetRevision: develop
+    targetRevision: main
     path: k8s/overlays/dev
   
   destination:

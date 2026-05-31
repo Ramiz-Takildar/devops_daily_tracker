@@ -24,10 +24,12 @@ spec:
         app: frontend
         component: web
     spec:
+      imagePullSecrets:
+      - name: dockerhub-secret
       containers:
       - name: frontend
-        image: devops-tracker-frontend:latest
-        imagePullPolicy: Never
+        image: ramiztakildar/devops-tracker-frontend:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
           name: http

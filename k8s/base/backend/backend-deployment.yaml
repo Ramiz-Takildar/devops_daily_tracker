@@ -24,10 +24,12 @@ spec:
         app: backend
         component: api
     spec:
+      imagePullSecrets:
+      - name: dockerhub-secret
       containers:
       - name: backend
-        image: devops-tracker-backend:latest
-        imagePullPolicy: Never
+        image: ramiztakildar/devops-tracker-backend:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
           name: http
