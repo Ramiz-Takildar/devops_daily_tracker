@@ -17,7 +17,8 @@ spec:
     name: http
     # nodePort: 30000  # Uncomment for NodePort type (range: 30000-32767)
   selector:
-    app: frontend
+    app: devops-tracker
+    managed-by: argocd
   # Session affinity for consistent user sessions
   sessionAffinity: ClientIP
   sessionAffinityConfig:
